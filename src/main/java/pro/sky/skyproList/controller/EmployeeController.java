@@ -24,7 +24,7 @@ public class EmployeeController {
     }
 
     @GetMapping("add")
-    public String add(@RequestParam String firstName, @RequestParam String lastName) {
+    public String add(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
         try {
             return employeeService.add(firstName, lastName) + " добавлен";
         } catch (EmployeeStorageIsFullException e) {
@@ -36,7 +36,7 @@ public class EmployeeController {
     }
 
     @GetMapping("remove")
-    public String remove(@RequestParam String firstName, @RequestParam String lastName) {
+    public String remove(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
         try {
             return employeeService.remove(firstName, lastName) + " удалён";
         } catch (EmployeeNotFoundException e) {
@@ -45,7 +45,7 @@ public class EmployeeController {
     }
 
     @GetMapping("find")
-    public String find(@RequestParam String firstName, @RequestParam String lastName) {
+    public String find(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
         try {
             return employeeService.find(firstName, lastName) + " найден";
         } catch (EmployeeNotFoundException e) {

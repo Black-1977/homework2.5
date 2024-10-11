@@ -1,11 +1,14 @@
 package pro.sky.skyproList.services;
 
+import org.springframework.stereotype.Service;
 import pro.sky.skyproList.exceptions.EmployeeAlreadyAddedException;
 import pro.sky.skyproList.exceptions.EmployeeNotFoundException;
 import pro.sky.skyproList.exceptions.EmployeeStorageIsFullException;
 
 import java.util.ArrayList;
 import java.util.List;
+
+@Service
 
 public class EmployeeService {
     List<Employee> employees;
