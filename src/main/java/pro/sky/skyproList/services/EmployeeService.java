@@ -5,54 +5,50 @@ import pro.sky.skyproList.exceptions.EmployeeAlreadyAddedException;
 import pro.sky.skyproList.exceptions.EmployeeNotFoundException;
 import pro.sky.skyproList.exceptions.EmployeeStorageIsFullException;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 
 public class EmployeeService {
-    List<Employee> employees;
+    Map<String, Employee> employees;
     private final int maxEmployees = 1;
     private int currentEmployees;
 
     public EmployeeService() {
         currentEmployees = 0;
-        employees = new ArrayList<>();
+        employees = new HashMap<>();
     }
 
     public String add(String firstName, String lastName) {
+        String s = firstName + " " + lastName;
         if (currentEmployees > 0) {
-            for (Employee employee : employees) {
-                if (employee.getFirstName().equals(firstName) && employee.getLastName().equals(lastName)) {
-                    throw new EmployeeAlreadyAddedException();
-                }
+            if (employees.containsKey(s)) {
+                throw new EmployeeAlreadyAddedException();
             }
         }
         if (currentEmployees == maxEmployees) {
             throw new EmployeeStorageIsFullException();
         }
-        employees.add(new Employee(firstName, lastName));
-        return employees.get(currentEmployees++).toString();
+        employees.put(s, new Employee(firstName, lastName));
+        currentEmployees++;
+        return s;
     }
 
     public String remove(String firstName, String lastName) {
-        for (int i = 0; i < employees.size(); i++) {
-            if (employees.get(i).getFirstName().equals(firstName) && employees.get(i).getLastName().equals(lastName)) {
-                String s = employees.get(i).toString();
-                employees.remove(i);
-                currentEmployees--;
-                return s;
-            }
+        String s = firstName + " " + lastName;
+        if (employees.containsKey(s)) {
+            employees.remove(s);
+            currentEmployees--;
+            return s;
         }
         throw new EmployeeNotFoundException();
     }
 
     public String find(String firstName, String lastName) {
-        for (Employee employee : employees) {
-            if (employee.getFirstName().equals(firstName) && employee.getLastName().equals(lastName)) {
-                return employee.toString();
+        String s = firstName + " " + lastName;
+         if (employees.containsKey(s)) {
+                return s;
             }
-        }
         throw new EmployeeNotFoundException();
     }
 }
