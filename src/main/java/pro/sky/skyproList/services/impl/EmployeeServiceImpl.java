@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import pro.sky.skyproList.exceptions.EmployeeAlreadyAddedException;
 import pro.sky.skyproList.exceptions.EmployeeNotFoundException;
 import pro.sky.skyproList.exceptions.EmployeeStorageIsFullException;
-import pro.sky.skyproList.services.Employee;
+import pro.sky.skyproList.model.Employee;
 import pro.sky.skyproList.services.EmployeeService;
 
 import java.util.*;

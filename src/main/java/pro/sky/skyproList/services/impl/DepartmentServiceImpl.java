@@ -2,7 +2,7 @@ package pro.sky.skyproList.services.impl;
 
 import org.springframework.stereotype.Service;
 import pro.sky.skyproList.services.DepartmentService;
-import pro.sky.skyproList.services.Employee;
+import pro.sky.skyproList.model.Employee;
 import pro.sky.skyproList.services.EmployeeService;
 
 import java.util.Comparator;

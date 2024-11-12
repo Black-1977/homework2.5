@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pro.sky.skyproList.services.DepartmentService;
-import pro.sky.skyproList.services.Employee;
+import pro.sky.skyproList.model.Employee;
 
 import java.util.List;
 import java.util.Map;
