@@ -9,24 +9,31 @@ import pro.sky.skyproList.exceptions.EmployeeNotFoundException;
 import pro.sky.skyproList.exceptions.EmployeeStorageIsFullException;
 import pro.sky.skyproList.services.EmployeeService;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("employee")
 
 public class EmployeeController {
 
-    EmployeeService employeeService = new EmployeeService();
+    private final EmployeeService employeeService;
+
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
 
     @GetMapping
     public String welcome() {
-        return "Добро пожаловать";
+        String s = "Добро пожаловать \n";
+        s += "Добавлен: " + employeeService.add("Ivan", "Ivanov", 40000, 1) + "\n";
+        s += "Добавлен: " + employeeService.add("Petr", "Sidorov", 70000, 2) + "\n";
+        s += "Добавлен: " + employeeService.add("Sidor", "Karpov", 60000, 1) + "\n";
+        s += "Добавлен: " + employeeService.add("Karp", "Petrov", 30000, 1) + "\n";
+        return s;
     }
 
     @GetMapping("add")
     public String add(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
         try {
-            return employeeService.add(firstName, lastName) + " добавлен";
+            return employeeService.add(firstName, lastName, 0, 0) + " добавлен";
         } catch (EmployeeStorageIsFullException e) {
             return "Добавлено максимальное количество сотрудников";
         } catch (EmployeeAlreadyAddedException e) {
