@@ -1,7 +1,9 @@
 package pro.sky.skyproList.services.impl;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import pro.sky.skyproList.exceptions.EmployeeAlreadyAddedException;
+import pro.sky.skyproList.exceptions.EmployeeNamesNotValidation;
 import pro.sky.skyproList.exceptions.EmployeeNotFoundException;
 import pro.sky.skyproList.exceptions.EmployeeStorageIsFullException;
 import pro.sky.skyproList.model.Employee;
@@ -27,7 +29,12 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
-    public String add(String firstName, String lastName, int salary, int departmentId) {
+    public String add(String first, String last, int salary, int departmentId) {
+        if (!StringUtils.isAlpha(first) || !StringUtils.isAlpha(last)) {
+            throw new EmployeeNamesNotValidation();
+        }
+        String firstName = StringUtils.capitalize(first);
+        String lastName = StringUtils.capitalize(last);
         String s = firstName + " " + lastName;
         if (currentEmployees > 0) {
             if (employees.containsKey(s)) {
