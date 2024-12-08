@@ -16,4 +16,6 @@ public interface EmployeeService {
     String find(String firstName, String lastName);
 
     Map<String, Employee> getAll();
+
+    int getMaxEmployees();
 }

@@ -1,4 +1,4 @@
-package pro.sky.skyproList.controller;
+package pro.sky.skyproList.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,12 +22,7 @@ public class EmployeeController {
 
     @GetMapping
     public String welcome() {
-        String s = "Добро пожаловать \n";
-        s += "Добавлен: " + employeeService.add("Ivan", "Ivanov", 40000, 1) + "\n";
-        s += "Добавлен: " + employeeService.add("Petr", "Sidorov", 70000, 2) + "\n";
-        s += "Добавлен: " + employeeService.add("Sidor", "Karpov", 60000, 1) + "\n";
-        s += "Добавлен: " + employeeService.add("Karp", "Petrov", 30000, 1) + "\n";
-        return s;
+        return  "Добро пожаловать";
     }
 
     @GetMapping("add")
