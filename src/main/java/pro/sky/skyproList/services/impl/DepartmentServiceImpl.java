@@ -21,6 +21,16 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
+    public int getEmployeeSalarySum(int departmentId) {
+        return employeeService.getAll()
+                .values()
+                .stream()
+                .filter(employee -> employee.getDepartmentId() == departmentId)
+                .mapToInt(Employee :: getSalary)
+                .sum();
+    }
+
+    @Override
     public Employee getEmployeeWithMaxSalary(int departmentId) {
         return employeeService.getAll()
                 .values()

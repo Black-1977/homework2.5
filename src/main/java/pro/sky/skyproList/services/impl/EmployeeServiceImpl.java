@@ -1,5 +1,6 @@
 package pro.sky.skyproList.services.impl;
 
+import jakarta.annotation.PostConstruct;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import pro.sky.skyproList.exceptions.EmployeeAlreadyAddedException;
@@ -15,11 +16,7 @@ import java.util.*;
 
 public class EmployeeServiceImpl implements EmployeeService{
     Map<String, Employee> employees;
-    private final int maxEmployees;
-
-    {
-        maxEmployees = 10;
-    }
+    private final int maxEmployees = 10;
 
     private int currentEmployees;
 
@@ -28,6 +25,13 @@ public class EmployeeServiceImpl implements EmployeeService{
         employees = new HashMap<>();
     }
 
+@PostConstruct
+private void initEmployees() {
+//    add("Ivan", "Ivanov", 40000, 1);
+//    add("Petr", "Sidorov", 70000, 2);
+//    add("Sidor", "Karpov", 60000, 1);
+//    add("Karp", "Petrov", 30000, 1);
+}
     @Override
     public String add(String first, String last, int salary, int departmentId) {
         if (!StringUtils.isAlpha(first) || !StringUtils.isAlpha(last)) {
@@ -72,5 +76,10 @@ public class EmployeeServiceImpl implements EmployeeService{
     @Override
     public Map<String, Employee> getAll() {
         return employees;
+    }
+
+    @Override
+    public int getMaxEmployees() {
+        return maxEmployees;
     }
 }
